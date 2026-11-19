@@ -61,6 +61,15 @@ jobs:
           node-version: 22
           cache: 'npm'
           cache-dependency-path: javascript/package-lock.json
+      - name: Cache Cargo dependencies
+        uses: actions/cache@v4
+        with:
+          path: |
+            ~/.cargo/registry
+            ~/.cargo/git
+          key: ${{ runner.os }}-cargo-${{ hashFiles('javascript/Cargo.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-cargo-
       - name: Use stable Rust
         run: |
           rustup toolchain install stable --no-self-update
@@ -112,6 +121,15 @@ jobs:
           node-version: 22
           cache: 'npm'
           cache-dependency-path: javascript/package-lock.json
+      - name: Cache Cargo dependencies
+        uses: actions/cache@v4
+        with:
+          path: |
+            ~/.cargo/registry
+            ~/.cargo/git
+          key: ${{ runner.os }}-cargo-${{ hashFiles('javascript/Cargo.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-cargo-
       - name: Use stable Rust
         run: |
           rustup toolchain install stable --no-self-update
